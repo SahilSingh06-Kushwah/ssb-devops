@@ -87,3 +87,8 @@ Notes:
 - The dump has no CREATE DATABASE/USE line, so a restore can never overwrite the live database.
 - `restore.sh` refuses to target the live database and compares row counts for every table.
 - Credentials come from `/etc/ssb-app/.env`; they are never stored in the scripts.
+
+## G. Security and permissions
+
+See `docs/security.md`. Summary: no secrets in Git, config in `/etc/ssb-app/.env` (640 root:www-data),
+app files owned by root and read-only for Apache, and the app uses the least-privilege `ssb_user` account.
