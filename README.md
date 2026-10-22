@@ -1,4 +1,4 @@
-# SSB Digital: Junior DevOps / Web Operations Take-Home
+# SSB Digital: Junior DevOps / Web Operations
 
 A small Core PHP + MySQL application (student name / college records) set up, deployed, backed up and
 troubleshot on a Linux server, covering assignment steps A to H.
