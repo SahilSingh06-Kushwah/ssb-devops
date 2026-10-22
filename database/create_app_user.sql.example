@@ -1,0 +1,5 @@
+-- Dedicated, least-privilege user for the application (never use root in the app).
+-- Replace CHANGE_ME with a strong password before running. Do not commit the real one.
+CREATE USER IF NOT EXISTS 'ssb_user'@'localhost' IDENTIFIED BY 'CHANGE_ME';
+GRANT SELECT, INSERT, UPDATE, DELETE ON ssb_app.* TO 'ssb_user'@'localhost';
+FLUSH PRIVILEGES;
