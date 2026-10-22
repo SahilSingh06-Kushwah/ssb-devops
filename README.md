@@ -61,3 +61,29 @@ never reach the server. A second run transfers nothing; after a change only that
 
 The script stops with a clear message if rsync, the source files, or the config file
 (`/etc/ssb-app/.env`) are missing, or if the DB password is still the placeholder.
+
+## F. Backup and restore
+
+Backup (database + application files, written to `backups/`, which is git-ignored):
+
+    ./scripts/backup.sh
+
+Manual equivalents:
+
+    mysqldump -u ssb_user -p --single-transaction --no-tablespaces ssb_app > backups/ssb_app_manual.sql
+    tar -czf backups/app_files_manual.tar.gz -C /var/www/html ssb-app
+
+Restore into a NEW test database and verify:
+
+    ./scripts/restore.sh backups/<file>.sql [target_db]
+
+Manual equivalents:
+
+    sudo mysql -e "CREATE DATABASE ssb_app_restore_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+    sudo mysql ssb_app_restore_test < backups/ssb_app_manual.sql
+    sudo mysql -e "SELECT COUNT(*) FROM ssb_app_restore_test.students;"
+
+Notes:
+- The dump has no CREATE DATABASE/USE line, so a restore can never overwrite the live database.
+- `restore.sh` refuses to target the live database and compares row counts for every table.
+- Credentials come from `/etc/ssb-app/.env`; they are never stored in the scripts.
