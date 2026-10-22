@@ -1,0 +1,4 @@
+# Keep Linux line endings so scripts run on the server
+*.sh  text eol=lf
+*.php text eol=lf
+*.sql text eol=lf

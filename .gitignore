@@ -1,0 +1,15 @@
+# Secrets
+.env
+config.php
+
+# Logs and local backups
+*.log
+backups/
+*.sql.gz
+*.tar.gz
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
